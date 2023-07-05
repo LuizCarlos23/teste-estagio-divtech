@@ -1,0 +1,71 @@
+﻿@page
+@model crud.Pages.Supplier.EditModel
+@{
+}
+
+<div class="d-flex flex-column justify-content-center">
+    <div class="row justify-content-center">
+        <div class="col-sm-8 col-md-6 col-lg-6">
+            <div class="title text-center">
+                <h1>Edit</h1>
+            </div>
+            <hr />
+
+            <div class="form">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Supplier.Id" />
+                    <div class="form-group">
+                        <label asp-for="Supplier.Name" class="control-label"></label>
+                        <input asp-for="Supplier.Name" class="form-control" />
+                        <span asp-validation-for="Supplier.Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Supplier.Cnpj" class="control-label"></label>
+                        <input asp-for="Supplier.Cnpj" class="form-control" id="inputCnpj"/>
+                        <span asp-validation-for="Supplier.Cnpj" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Supplier.Specialty" class="control-label"></label>
+                        <select class="form-select" aria-label="Default select example" asp-for="Supplier.Specialty">
+                            <option value=@crud.Models.Specialty.Commerce>Comércio</option>
+                            <option value=@crud.Models.Specialty.Service>Serviço</option>
+                            <option value=@crud.Models.Specialty.Industy>Indústria</option>
+                        </select>
+                        <span asp-validation-for="Supplier.Specialty" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Supplier.Cep" class="control-label"></label>
+                        <input asp-for="Supplier.Cep" class="form-control" id="inputCep" />
+                        <span asp-validation-for="Supplier.Cep" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Supplier.Address" class="control-label"></label>
+                        <div class="input-address d-flex">
+                            <input asp-for="Supplier.Address" class="form-control flex-grow-1 me-2" id="inputAddress" readonly />
+                            <div class="spinner-border align-self-center" role="status" style="visibility:hidden;">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Supplier.Address" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-2">
+                        <input type="submit" value="Salvar" class="btn btn-primary" id="submitBtn" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="/js/supplier/getAddress.js"></script>
+    <script src="/js/loading.js"></script>
+    <script src="/js/supplier/cnpjValidator.js"></script>
+}
